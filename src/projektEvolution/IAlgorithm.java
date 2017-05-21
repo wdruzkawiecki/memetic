@@ -1,10 +1,10 @@
 package projektEvolution;
 
 public interface IAlgorithm {
-	public int Mutation();
-	public int Crossover();
-	public int SurvivorSelection();
-	public int StopCondition();
-	public int Run();
-	public int ReturnResultPopulation();
+	public Object Mutation();
+	public Object Crossover();
+	public Object SurvivorSelection();
+	public Object StopCondition();
+	public Object Run();
+	public Object ReturnResultPopulation();
 }
