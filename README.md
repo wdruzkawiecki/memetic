@@ -1,0 +1,1 @@
+Przydzia³ zadañ na Google Docs: https://docs.google.com/spreadsheets/d/1CGj1G6LouXpnnOZ9Xwf92JMb2yaMuK4tjxSlYhDlT3c/edit?usp=sharing
