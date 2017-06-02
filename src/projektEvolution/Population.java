@@ -1,8 +1,10 @@
 package projektEvolution;
 
+import projektEvolution.notify.ISubject;
+
 import java.util.ArrayList;
 
-public class Population {
+public class Population implements ISubject {
 	ArrayList<Point> pointList;
 	public Population() {
 		this.pointList = new ArrayList<Point>();
