@@ -1,6 +1,4 @@
 package projektEvolutionReadWrite;
-import java.util.ArrayList;
-import java.util.List;
 import projektEvolution.Point;
 
 public class Findings {
@@ -8,6 +6,8 @@ public class Findings {
 	Point pointsResult;
 	
 	int iterationCount;
+	int localExtremum;
+	int globalExtremum;
 	
 	public Findings()
 	{
@@ -34,4 +34,27 @@ public class Findings {
 	{
 		return iterationCount;
 	}
+	
+	void setLocalExtremum(int param)
+	{
+		localExtremum = param;
+	}
+	
+	int getLocalExtremum()
+	{
+		return localExtremum;
+	}
+	
+	void setGlobalExtremum(int param)
+	{
+		globalExtremum = param;
+	}
+	
+	int getGlobalExtremum()
+	{
+		return globalExtremum;
+	}
+	
+	
+	
 }
