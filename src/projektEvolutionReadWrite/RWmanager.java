@@ -55,8 +55,8 @@ public class RWmanager implements IWriteRead {
 		}
 		catch(IOException e){
 			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 	
 	private String GetCurrentProjectPath()
