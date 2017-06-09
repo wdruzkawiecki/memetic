@@ -7,6 +7,8 @@ package projektEvolution;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -25,6 +27,15 @@ public class MyFrame extends JFrame {
         super("Memetic");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800,200);
+        
+        class DoIt implements ActionListener {
+
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+          }
         
         JPanel scopePanel = new JPanel();
         scopePanel.setBorder(BorderFactory.createTitledBorder("Dziedzina"));
@@ -46,7 +57,7 @@ public class MyFrame extends JFrame {
 	        JLabel scopeEndLabel = new JLabel();
 	        scopeEndLabel.setText("Koniec dziedziny:");
 	        JFormattedTextField scopeEndField = new JFormattedTextField(format);
-	        scopeBeginningField.setColumns(10);
+	        scopeEndField.setColumns(10);
         
         scopePanel.add(scopeEndLabel);
         scopePanel.add(scopeEndField);
@@ -70,7 +81,10 @@ public class MyFrame extends JFrame {
 	        
 	        JButton submitButton = new JButton();
 	        submitButton.setText("Generuj");
+	        submitButton.addActionListener(new DoIt());
 	        buttonPanel.add(submitButton);
+	        
+	    setLocationRelativeTo(null);
 	   
         setVisible(true);
     }
