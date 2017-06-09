@@ -7,9 +7,14 @@ package projektEvolution;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,16 +30,23 @@ public class MyFrame extends JFrame {
         scopePanel.setBorder(BorderFactory.createTitledBorder("Dziedzina"));
         add(scopePanel, BorderLayout.NORTH);
         
-        JLabel scopeBeginningLabel = new JLabel();
-        scopeBeginningLabel.setText("Poczatek dziedziny:");
-        JTextField scopeBeginningField = new JTextField(10);
+	        NumberFormat format = DecimalFormat.getInstance();
+	        format.setMinimumFractionDigits(10);
+	        format.setMaximumFractionDigits(10);
+	        format.setRoundingMode(RoundingMode.HALF_UP);
+	        JLabel scopeBeginningLabel = new JLabel();
+	        scopeBeginningLabel.setText("Poczatek dziedziny:");
+	        JFormattedTextField scopeBeginningField = new JFormattedTextField(format);
+	        scopeBeginningField.setColumns(10);
         
         scopePanel.add(scopeBeginningLabel);
         scopePanel.add(scopeBeginningField);
         
-        JLabel scopeEndLabel = new JLabel();
-        scopeEndLabel.setText("Koniec dziedziny:");
-        JTextField scopeEndField = new JTextField(10);
+
+	        JLabel scopeEndLabel = new JLabel();
+	        scopeEndLabel.setText("Koniec dziedziny:");
+	        JFormattedTextField scopeEndField = new JFormattedTextField(format);
+	        scopeBeginningField.setColumns(10);
         
         scopePanel.add(scopeEndLabel);
         scopePanel.add(scopeEndField);
@@ -42,24 +54,24 @@ public class MyFrame extends JFrame {
         JPanel algorithmsPanel = new JPanel();
         algorithmsPanel.setBorder(BorderFactory.createTitledBorder("Algorytmy"));
         add(algorithmsPanel, BorderLayout.CENTER);
-        
-        JCheckBox evolutionStrategyCheckbox = new JCheckBox("Evolution Strategy");
-        algorithmsPanel.add(evolutionStrategyCheckbox);
-        
-        JCheckBox psoCheckbox = new JCheckBox("PSO");
-        algorithmsPanel.add(psoCheckbox);
-        
-        JCheckBox blxCheckbox = new JCheckBox("BLX");
-        algorithmsPanel.add(blxCheckbox);
-         
+	        
+	        JCheckBox evolutionStrategyCheckbox = new JCheckBox("Evolution Strategy");
+	        algorithmsPanel.add(evolutionStrategyCheckbox);
+	        
+	        JCheckBox psoCheckbox = new JCheckBox("PSO");
+	        algorithmsPanel.add(psoCheckbox);
+	        
+	        JCheckBox blxCheckbox = new JCheckBox("BLX");
+	        algorithmsPanel.add(blxCheckbox);
+	         
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBorder(BorderFactory.createTitledBorder(""));
         add(buttonPanel, BorderLayout.SOUTH);
-        
-        JButton submitButton = new JButton();
-        submitButton.setText("Generuj");
-        buttonPanel.add(submitButton);
-   
+	        
+	        JButton submitButton = new JButton();
+	        submitButton.setText("Generuj");
+	        buttonPanel.add(submitButton);
+	   
         setVisible(true);
     }
 }
