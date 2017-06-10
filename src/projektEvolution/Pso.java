@@ -1,45 +1,34 @@
 package projektEvolution;
 
-import java.util.ArrayList;
-import java.util.Vector;
 import java.util.Random;
 
 public class Pso implements IAlgorithm {
     private Random generator = new Random();
     private Population pop = new Population();
-
-    private double[] valueRastriginList = new double[POP_SIZE];
-    private double[] pBest = new double[POP_SIZE];
-
-    //do rastrigina
-    public Point p1 = new Point;
-    public double[] vector;
-    private double z;
+    private double[] valueList = new double[POP_SIZE];
 
     //stałe?
     double w;
     double c1 = 2.0;
     double c2 = 2.0;
 
-
-    //obliczanie wartości funkcji
-    public void calculateRastrigin() {
-        vector = p1.getVector();
-        int A = 10;
-        int n = 2;
-        // f(x) = A * n + E(xi^2 - A * cos(2pi * xi))
-        z = A * n;
-        for(int i = 0; i < n; i++) {
-            z += (Math.pow(p1.vector[i], 2) - A * Math.cos(2 * Math.PI * p1.vector[i]));
-        }
+    //do pętli zwrot wartości
+    private double updateValueList(Point p) {
+            IFunction rastr = new RastriginFunction();
+            return rastr.getValue(p);
     }
 
-    //do pętli zwrot wartości
-    public double valueRastrigin() {
-        for(int i=0; i<POP_SIZE; i++) {
-            calculateRastrigin();
-            valueRastriginList[i] = z;
+    //pozycja najmniejsza w liście
+    public static int getMinPos(double[] list) {
+        int pos = 0;
+        double minValue = list[0];
+        for(int i=0; i<list.length; i++) {
+            if(list[i] < minValue) {
+                pos = i;
+                minValue = list[i];
+            }
         }
+        return pos;
     }
 
     public void Mutation(CreatureA a) {
@@ -53,25 +42,25 @@ public class Pso implements IAlgorithm {
                 x[i] = x[i] + v[i];
             }
         }
-    };
+    }
 
     public void Crossover() {
         if(x[i].xlb<xgb)
             xgb=x[i].xlb;
-    };
+    }
 
     public void SurvivorSelection() {
         for (int i; i<POP_SIZE; i++)
             if(x[i]>xgb)
                 xgb=x[i];
-    };
+    }
 
     public void StopCondition() {
 
-    };
+    }
 
     public void Run() {
-        initializePopulation();
+        initializePopulation(domain, v, pop_size);
         valueRastrigin();
 
 /*
@@ -83,7 +72,6 @@ public class Pso implements IAlgorithm {
                 SurvivorSelection();
             }
         }*/
-
 				double r1 = generator.nextDouble();
 				double r2 = generator.nextDouble();
 
@@ -109,26 +97,30 @@ public class Pso implements IAlgorithm {
 				CreatureA c = new CreatureA(newVector, newSpeed);
                 pop.addPoint(c);
 			}
-    };
 
     public void ReturnResultPopulation() {
 
-    };
+    }
 
-    public void initializePopulation() {
-        for (int i=0; i<POP_SIZE; i++) {
+    //Podajemy dziedzinę, z jakiej mamy korzystać A(x0, y0), B(x1, y1), początkowy wektor v(-1,1), populację 1000
+    private void initializePopulation(Domain domain, Point v, int pop_size) {
+        for (int i = 0; i < pop_size; i++) {
+            //Dwa punkty, które określają dziedzinę
+            Point A, B;
+            //Wyciągamy lewy górny róg i prawy dolny róg
+            A = domain.getTopLeftCorner();
+            B = domain.getBottomRightCorner();
+
             Point p = new Point();
 
             double[] vector = new double[2];
-            vector[0] = X1 + generator.nextDouble() * (X2 - X1);
-            vector[1] = X1 + generator.nextDouble() * (X2 - X1);
+            vector[0] = A.getVector()[0] + generator.nextDouble() * (B.getVector()[0] - A.getVector()[0]);
+            vector[1] = B.getVector()[1] + generator.nextDouble() * (A.getVector()[1] - B.getVector()[1]);
             p.setVector(vector);
 
-            Point v = new Point();
-
             double[] speed = new double[2];
-            speed[0] = V1 + generator.nextDouble() * (V2 - V1);
-            speed[1] = V1 + generator.nextDouble() * (V2 - V1);
+            speed[0] = v.getVector()[0] + generator.nextDouble() * (v.getVector()[1] - v.getVector()[0]);
+            speed[1] = v.getVector()[0] + generator.nextDouble() * (v.getVector()[1] - v.getVector()[0]);
             v.setVector(speed);
 
             CreatureA c = new CreatureA(vector, speed);

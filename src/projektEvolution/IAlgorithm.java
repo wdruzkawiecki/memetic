@@ -5,12 +5,6 @@ public interface IAlgorithm {
 	 * Na razie wszystkie zwracaj� Object..
 	 * */
 	int POP_SIZE = 100000;
-	double X1 = -5;
-	double Y1 = 5;
-	double X2 = 5;
-	double Y2 = -5;
-    double V1 = -1;
-    double V2 = 1;
 
 	public Object Mutation();
 	public Object Crossover();
