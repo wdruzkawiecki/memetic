@@ -13,7 +13,7 @@ public class Pso implements IAlgorithm {
     double c2 = 2.0;
 
     //do pętli zwrot wartości
-    private double updateValueList(Point p) {
+    private double getValueList(Point p) {
             IFunction rastr = new RastriginFunction();
             return rastr.getValue(p);
     }
