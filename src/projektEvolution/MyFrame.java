@@ -21,6 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 public class MyFrame extends JFrame {
     public MyFrame() {
@@ -28,14 +29,7 @@ public class MyFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800,200);
         
-        class DoIt implements ActionListener {
 
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-          }
         
         JPanel scopePanel = new JPanel();
         scopePanel.setBorder(BorderFactory.createTitledBorder("Dziedzina"));
@@ -98,9 +92,43 @@ public class MyFrame extends JFrame {
 	        
 	        JButton submitButton = new JButton();
 	        submitButton.setText("Generuj");
-	        submitButton.addActionListener(new DoIt());
-	        buttonPanel.add(submitButton);
 	        
+	        buttonPanel.add(submitButton);
+                
+        class DoIt implements ActionListener {
+
+			public void actionPerformed(ActionEvent arg0) {
+                            
+                            SwingUtilities.invokeLater(new Runnable() {
+
+                                @Override
+                                    public void run() {
+                                    double ax = Double.parseDouble(scopeBeginningFieldX.getText().replace(",", "."));
+                                    double ay = Double.parseDouble(scopeBeginningFieldY.getText().replace(",", "."));
+                                    double bx = Double.parseDouble(scopeEndFieldX.getText().replace(",", "."));
+                                    double by = Double.parseDouble(scopeEndFieldY.getText().replace(",", "."));
+                                    
+                                    boolean evolution = evolutionStrategyCheckbox.isSelected();
+                                    boolean pso = psoCheckbox.isSelected();
+                                    boolean blx = blxCheckbox.isSelected();
+                                    
+                                    RandomGen RandomGen = new RandomGen();
+                                    double[][] populacja = RandomGen.randFunctionDouble(ax, ay, bx, by, 1000);
+                                    
+                                    if (evolution) {}
+                                    if (pso) {}
+                                    if (blx) {}
+                                                                    
+                                }
+                            });
+				
+			}
+                        
+
+          }
+	        
+            submitButton.addActionListener(new DoIt());
+            
 	    setLocationRelativeTo(null);
 	   
         setVisible(true);
