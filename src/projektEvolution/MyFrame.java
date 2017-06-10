@@ -45,23 +45,40 @@ public class MyFrame extends JFrame {
 	        format.setMinimumFractionDigits(10);
 	        format.setMaximumFractionDigits(10);
 	        format.setRoundingMode(RoundingMode.HALF_UP);
-	        JLabel scopeBeginningLabel = new JLabel();
-	        scopeBeginningLabel.setText("Poczatek dziedziny:");
-	        JFormattedTextField scopeBeginningField = new JFormattedTextField(format);
-	        scopeBeginningField.setColumns(10);
+                
+	        JLabel scopeBeginningLabelX = new JLabel();
+	        scopeBeginningLabelX.setText("Poczatek dziedziny (");
+	        JFormattedTextField scopeBeginningFieldX = new JFormattedTextField(format);
+	        scopeBeginningFieldX.setColumns(10);
+                
+                JLabel scopeBeginningLabelY = new JLabel();
+	        scopeBeginningLabelY.setText(")");
+	        JFormattedTextField scopeBeginningFieldY = new JFormattedTextField(format);
+	        scopeBeginningFieldY.setColumns(10);
         
-        scopePanel.add(scopeBeginningLabel);
-        scopePanel.add(scopeBeginningField);
+        scopePanel.add(scopeBeginningLabelX);
+        scopePanel.add(scopeBeginningFieldX);
+        
+        scopePanel.add(scopeBeginningFieldY);
+        scopePanel.add(scopeBeginningLabelY);
         
 
-	        JLabel scopeEndLabel = new JLabel();
-	        scopeEndLabel.setText("Koniec dziedziny:");
-	        JFormattedTextField scopeEndField = new JFormattedTextField(format);
-	        scopeEndField.setColumns(10);
+	        JLabel scopeEndLabelX = new JLabel();
+	        scopeEndLabelX.setText("Koniec dziedziny (");
+	        JFormattedTextField scopeEndFieldX = new JFormattedTextField(format);
+	        scopeEndFieldX.setColumns(10);
+                
+                 JLabel scopeEndLabelY = new JLabel();
+	        scopeEndLabelY.setText(")");
+	        JFormattedTextField scopeEndFieldY = new JFormattedTextField(format);
+	        scopeEndFieldY.setColumns(10);
         
-        scopePanel.add(scopeEndLabel);
-        scopePanel.add(scopeEndField);
-            
+        scopePanel.add(scopeEndLabelX);
+        scopePanel.add(scopeEndFieldX);
+         
+        scopePanel.add(scopeEndFieldY);
+        scopePanel.add(scopeEndLabelY);
+        
         JPanel algorithmsPanel = new JPanel();
         algorithmsPanel.setBorder(BorderFactory.createTitledBorder("Algorytmy"));
         add(algorithmsPanel, BorderLayout.CENTER);
