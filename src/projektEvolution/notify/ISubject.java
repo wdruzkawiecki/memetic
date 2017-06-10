@@ -1,3 +1,6 @@
 package projektEvolution.notify;
 
-public interface ISubject {}
+public interface ISubject {
+    
+}
+

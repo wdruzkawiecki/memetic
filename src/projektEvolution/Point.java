@@ -2,6 +2,12 @@ package projektEvolution;
 
 public class Point {
 	double[] vector;
+	public Point(double[] vector) {
+		setVector(vector);
+	}
+	public Point() {
+
+	}
 	double substract(Point a, Point b) {
 		return 0;
 	}

@@ -1,9 +1,17 @@
 package projektEvolution;
 
 public interface IAlgorithm {
-	/* Interfejs definiuj¹cy metody wymagane do zaimplementowania przez konkretne klasy algorytmów.
-	 * Na razie wszystkie zwracaj¹ Object..
+	/* Interfejs definiujï¿½cy metody wymagane do zaimplementowania przez konkretne klasy algorytmï¿½w.
+	 * Na razie wszystkie zwracajï¿½ Object..
 	 * */
+	int POP_SIZE = 100000;
+	double X1 = -5;
+	double Y1 = 5;
+	double X2 = 5;
+	double Y2 = -5;
+    double V1 = -1;
+    double V2 = 1;
+
 	public Object Mutation();
 	public Object Crossover();
 	public Object SurvivorSelection();
