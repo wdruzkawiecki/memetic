@@ -7,7 +7,7 @@ public interface IAlgorithm {
 	public void Mutation();
 	public void Crossover();
 	public void SurvivorSelection();
-	public void StopCondition();
+	public Boolean StopCondition();
 	public void Run();
 	public void ReturnResultPopulation();
 }
