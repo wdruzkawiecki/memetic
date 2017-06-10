@@ -4,22 +4,24 @@ import java.util.*;
 
 public class RandomGen {
     
-    int randInt(int x, int y)
+    public double randDouble(double x, double y)
     {
         Random r = new Random();
-        int number = r.nextInt(y)-x;
+        double zakres = y-x;
+        double number = r.nextDouble()*zakres;
+        number = number + x;
         return number;
     }
     
-    int[][] randFunction(int ax, int ay, int bx, int by)
+    public double[][] randFunctionDouble(double ax, double ay, double bx, double by, int ilePunktow)
+    // a - punkt początkowy zakresu na osiach x,y // b - punkt końcowy zakresu na osiach x,y //
     {
-        int[][] finalTab;
-        finalTab = new int[ay-ax][2];
-        int limiter = ay-ax;
-        for(int iter = 0; iter < limiter; iter++)
+        double[][] finalTab;
+        finalTab = new double[ilePunktow][2];               // Generacja tablicy punktów puli początkowej //
+        for(int iter = 0; iter < ilePunktow; iter++)
         {
-            finalTab[iter][0] = randInt(ax, ay); // wspolrzedna pozioma
-            finalTab[iter][1] = randInt(bx, by); // wspolrzedna pionowa
+            finalTab[iter][0] = randDouble(ax, ay); // Wspolrzedna pozioma
+            finalTab[iter][1] = randDouble(bx, by); // Wspolrzedna pionowa   
         } 
         return finalTab;
     }
