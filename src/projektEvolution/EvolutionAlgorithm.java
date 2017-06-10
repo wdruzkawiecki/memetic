@@ -30,4 +30,9 @@ public class EvolutionAlgorithm implements IAlgorithm {
 		
 	}
 
+	public void Crossover() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
