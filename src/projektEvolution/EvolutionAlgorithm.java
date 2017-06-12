@@ -1,33 +1,38 @@
 package projektEvolution;
 
-import java.util.ArrayList;
-import java.util.List;
+import projektEvolution.notify.Notifier;
+
+import java.util.Collections;
 
 public class EvolutionAlgorithm implements IAlgorithm {
 
 	public Population initialPopulation;
 	public Population resultPopulation;
-	private int initialPopulationCount = 0;
+	private int initialPopulationSize = 0;
 	IFunction function;
 	private static double spare;
 	private static boolean isSpareReady = false;
 	double tau1 = 1/(Math.sqrt(2*Math.sqrt(2)));
 	double tau2 = 1/(Math.sqrt(4));
+
+	Notifier<Population> notifier;
+
 	
 	public EvolutionAlgorithm(Population initialPopulation, IFunction function) {
 		this.initialPopulation = initialPopulation;
 		this.function = function;
-		this.initialPopulationCount = initialPopulation.pointList.size();
+		this.initialPopulationSize = initialPopulation.pointList.size();
+		this.notifier = new Notifier<Population>();
 	}
 	
 	public void Mutation() {
 		double sigmaX = 1;
 		double sigmaY = 1;
-		for(int i = 0; i<initialPopulation.pointList.size(); i++) {
+		for(int i = 0; i<resultPopulation.pointList.size(); i++) {
 			sigmaX = sigmaX*Math.exp(getGaussian(0, tau1) + getGaussian(0, tau2)); //TODO: drugi gaussian do poprawy
 			sigmaY = sigmaY*Math.exp(getGaussian(0, tau1) + getGaussian(0, tau2));
-			initialPopulation.pointList.get(i).vector[0] = getGaussian(initialPopulation.pointList.get(i).vector[0], sigmaX);
-			initialPopulation.pointList.get(i).vector[1] = getGaussian(initialPopulation.pointList.get(i).vector[1], sigmaY);
+			resultPopulation.pointList.get(i).vector[0] = getGaussian(resultPopulation.pointList.get(i).vector[0], sigmaX);
+			resultPopulation.pointList.get(i).vector[1] = getGaussian(resultPopulation.pointList.get(i).vector[1], sigmaY);
 		}
 	}
 
@@ -42,14 +47,25 @@ public class EvolutionAlgorithm implements IAlgorithm {
 		vectorZ[1] = waga1 * p1.vector[1] + waga2 * p2.vector[1];
 		
 		p3.setVector(vectorZ);
-		initialPopulation.addPoint(p3);
+		resultPopulation.addPoint(p3);
 	}
 
 	public void SurvivorSelection() {
-		for (int i = 0; i < initialPopulation.pointList.size(); i++) {
-			//TODO: Zrobiæ dopasowanie dla punktów, posortowaæ i zwróciæ najlepsze do initialPopulationSize
+        Population survivor = Population.CreateInitialPopulation(this.initialPopulationSize);
+
+        Collections.sort(this.initialPopulation.getPointList(), new FitnessComparator());
+        Collections.sort(this.resultPopulation.getPointList(), new FitnessComparator());
+
+		for (int i = 0; i < resultPopulation.pointList.size(); i++) {
+
+            if(initialPopulation.getPoint(i).getValue() < resultPopulation.getPoint(i).getValue())
+                survivor.setPoint(i, initialPopulation.getPoint(i));
+
+			else
+				survivor.setPoint(i, resultPopulation.getPoint(i));
 			
 		}
+		initialPopulation = survivor;
 	}
 
 	public Boolean StopCondition() {
@@ -61,6 +77,7 @@ public class EvolutionAlgorithm implements IAlgorithm {
 			Mutation();
 			Crossover();
 			SurvivorSelection();
+			this.notifier.notify(resultPopulation);
 		}
 	}
 
@@ -69,9 +86,9 @@ public class EvolutionAlgorithm implements IAlgorithm {
 	}
 
 	public void Crossover() {
-		for(int i=0; i<initialPopulation.pointList.size(); i++) {
-			if(i%2 == 0 && i < (initialPopulation.pointList.size() - 1)) {
-				Crossover(initialPopulation.pointList.get(i), initialPopulation.pointList.get(i));
+		for(int i=0; i<resultPopulation.pointList.size(); i++) {
+			if(i%2 == 0 && i < (resultPopulation.pointList.size() - 1)) {
+				Crossover(resultPopulation.pointList.get(i), resultPopulation.pointList.get(i));
 			}
 		}
 		
@@ -94,7 +111,11 @@ public class EvolutionAlgorithm implements IAlgorithm {
 	        return mean + stdDev * u * mul;
 	    }
 	}
-	
-	
-	
+
+
+	@Override
+	public Notifier getNotifier() {
+		return this.notifier;
+	}
+
 }

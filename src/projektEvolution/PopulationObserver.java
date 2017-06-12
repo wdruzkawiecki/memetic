@@ -12,6 +12,6 @@ public class PopulationObserver extends Observer<Population> {
 
     @Override
     public void Update(Population population) {
-
+        // population for every generation
     }
 }

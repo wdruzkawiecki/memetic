@@ -1,24 +1,27 @@
 package projektEvolution;
 
 import projektEvolution.notify.Notifier;
+import projektEvolution.notify.Observer;
 
 public class Solver extends Notifier<Population> {
 	private IAlgorithm algorithm;
 	private Domain domain;
 	private IFunction function;
 	private Population initialPopulation;
-	private Notifier<Population> notifier;
+	private Observer<Population> observer;
 	
 	private void solve(){
-		// metoda, która bêdzie odpowiada³a za konkretne obliczenia
+		EvolutionAlgorithm evolutionAlgorithm = new EvolutionAlgorithm(initialPopulation, function);
+
+		evolutionAlgorithm.notifyAll();
 	}
-	
+
 	public Solver(IAlgorithm algorithm, Domain domain, IFunction function, Population initialPopulation) {
 		this.algorithm = algorithm;
 		this.domain = domain;
 		this.function = function;
 		this.initialPopulation = initialPopulation;
-		this.notifier = new Notifier<Population>();
+		this.observer = new PopulationObserver(algorithm.getNotifier());
 	}
 	
 	public Population getSolution() {
@@ -27,7 +30,4 @@ public class Solver extends Notifier<Population> {
 		return new Population();
 	}
 
-	public Notifier<Population> getNotifier(){
-		return notifier;
-	}
 }
