@@ -9,6 +9,17 @@ public class Point {
 		return a > 0 ? a : (-a);
 	}
 
+	public Point(){
+
+	}
+
+	public Point(Point point){
+		this.vector = new  double[point.getVector().length];
+		for(int i=0; i < point.getVector().length; i++){
+			this.vector[i] = point.getVector()[i];
+		}
+	}
+
 	public void setVector(double[] vector) {
 		this.vector = vector;
 	}

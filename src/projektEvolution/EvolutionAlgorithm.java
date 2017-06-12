@@ -20,6 +20,7 @@ public class EvolutionAlgorithm implements IAlgorithm {
 	
 	public EvolutionAlgorithm(Population initialPopulation, IFunction function) {
 		this.initialPopulation = initialPopulation;
+		this.resultPopulation = new Population(initialPopulation);
 		this.function = function;
 		this.initialPopulationSize = initialPopulation.pointList.size();
 		this.notifier = new Notifier<Population>();
@@ -65,7 +66,7 @@ public class EvolutionAlgorithm implements IAlgorithm {
 				survivor.setPoint(i, resultPopulation.getPoint(i));
 			
 		}
-		initialPopulation = survivor;
+		initialPopulation = new Population(survivor);
 	}
 
 	public Boolean StopCondition() {

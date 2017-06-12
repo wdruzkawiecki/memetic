@@ -16,6 +16,14 @@ public class Population implements ISubject {
 		this.pointList = pointList;
 	}
 
+	public Population(Population population) {
+		this.pointList = new ArrayList<Point>();
+
+		for(Point point : population.pointList){
+			this.pointList.add(new Point(point));
+		}
+	}
+
 	public void addPoint(Point p) {
 		this.pointList.add(p);
 	}
