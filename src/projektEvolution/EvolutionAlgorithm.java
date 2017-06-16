@@ -9,6 +9,8 @@ public class EvolutionAlgorithm implements IAlgorithm {
 	public Population initialPopulation;
 	public Population resultPopulation;
 	private int initialPopulationSize = 0;
+	private int iterationsCount = 0;
+	private int maxIterations = 0;
 	IFunction function;
 	private static double spare;
 	private static boolean isSpareReady = false;
@@ -18,11 +20,12 @@ public class EvolutionAlgorithm implements IAlgorithm {
 	Notifier<Population> notifier;
 
 	
-	public EvolutionAlgorithm(Population initialPopulation, IFunction function) {
+	public EvolutionAlgorithm(Population initialPopulation, IFunction function, int maxIterations) {
 		this.initialPopulation = initialPopulation;
 		this.resultPopulation = new Population(initialPopulation);
 		this.function = function;
 		this.initialPopulationSize = initialPopulation.pointList.size();
+		this.maxIterations = maxIterations;
 		this.notifier = new Notifier<Population>();
 	}
 	
@@ -70,7 +73,17 @@ public class EvolutionAlgorithm implements IAlgorithm {
 	}
 
 	public Boolean StopCondition() {
-		return false;
+		int condition = 0;
+
+		while (this.iterationsCount >= this.maxIterations) {
+			condition++;
+		}
+		/*
+		@TODO
+		Warunek zatrzymania powinien opieraæ siê tak¿e na sprawdzeniu ró¿nicy miêdzy kolejnymi wyliczeniami
+		 */
+
+		return condition > 0;
 	}
 
 	public void Run() {
@@ -78,12 +91,13 @@ public class EvolutionAlgorithm implements IAlgorithm {
 			Mutation();
 			Crossover();
 			SurvivorSelection();
+			this.iterationsCount++;
 			this.notifier.notify(resultPopulation);
 		}
 	}
 
-	public void ReturnResultPopulation() {
-		
+	public Population ReturnResultPopulation() {
+		return this.resultPopulation;
 	}
 
 	public void Crossover() {

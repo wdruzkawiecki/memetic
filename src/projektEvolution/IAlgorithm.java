@@ -11,6 +11,6 @@ public interface IAlgorithm {
 	public void SurvivorSelection();
 	public Boolean StopCondition();
 	public void Run();
-	public void ReturnResultPopulation();
+	public Population ReturnResultPopulation();
 	public Notifier getNotifier();
 }
