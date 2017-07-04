@@ -3,6 +3,6 @@ import projektEvolutionReadWrite.Findings;
 
 public interface IWriteRead {
 
-	String Save(Findings param);
+	Boolean Save(Findings param);
 	Findings Read();
 }

@@ -1,13 +1,16 @@
 package projektEvolution;
 
+import projektEvolution.notify.Notifier;
+
 public interface IAlgorithm {
-	/* Interfejs definiuj¹cy metody wymagane do zaimplementowania przez konkretne klasy algorytmów.
-	 * Na razie wszystkie zwracaj¹ Object..
+	/* Interfejs definiujï¿½cy metody wymagane do zaimplementowania przez konkretne klasy algorytmï¿½w.
+	 * Na razie wszystkie zwracajï¿½ void..
 	 * */
-	public Object Mutation();
-	public Object Crossover();
-	public Object SurvivorSelection();
-	public Object StopCondition();
-	public Object Run();
-	public Object ReturnResultPopulation();
+	public void Mutation();
+	public void Crossover();
+	public void SurvivorSelection();
+	public Boolean StopCondition();
+	public void Run();
+	public Population ReturnResultPopulation();
+	public Notifier getNotifier();
 }

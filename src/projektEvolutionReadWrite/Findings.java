@@ -1,23 +1,23 @@
 package projektEvolutionReadWrite;
-import java.util.ArrayList;
-import java.util.List;
 import projektEvolution.Point;
 
 public class Findings {
 	
-	List<Point> pointsResult;
+	Point pointsResult;
 	
 	int iterationCount;
+	int localExtremum;
+	int globalExtremum;
 	
 	public Findings()
 	{
-		pointsResult = new ArrayList<Point>();
+		pointsResult = new Point();
 		iterationCount = 0;
 	}
 	
-	void addPoint(Point pointParam)
+	void setPoint(Point pointParam)
 	{
-		pointsResult.add(pointParam);
+		pointsResult = pointParam;
 	}
 	
 	void setIterationCount(int param)
@@ -25,7 +25,7 @@ public class Findings {
 		iterationCount = param;
 	}
 	
-	List<Point> getPointsResult()
+	Point getPointsResult()
 	{
 		return pointsResult;
 	}
@@ -34,4 +34,27 @@ public class Findings {
 	{
 		return iterationCount;
 	}
+	
+	void setLocalExtremum(int param)
+	{
+		localExtremum = param;
+	}
+	
+	int getLocalExtremum()
+	{
+		return localExtremum;
+	}
+	
+	void setGlobalExtremum(int param)
+	{
+		globalExtremum = param;
+	}
+	
+	int getGlobalExtremum()
+	{
+		return globalExtremum;
+	}
+	
+	
+	
 }
