@@ -4,6 +4,7 @@ import projektEvolution.notify.ISubject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Population implements ISubject {
 	ArrayList<Point> pointList;
@@ -24,6 +25,26 @@ public class Population implements ISubject {
 		}
 	}
 
+    public static Population CreateInitialPopulation(Domain domain, int populationSize) {
+        Population population = new Population();
+
+        double maxX = domain.getTopLeftCorner().getVector()[1];
+        double minX = domain.getBottomRightCorner().getVector()[0];
+
+        double maxY = domain.getTopLeftCorner().getVector()[1];
+        double minY = domain.getBottomRightCorner().getVector()[0];
+
+        for (int i = 0; i < populationSize; i++) {
+            Point newPoint = new Point(new double[]{
+                    ThreadLocalRandom.current().nextDouble(minX, maxX + 1),
+                    ThreadLocalRandom.current().nextDouble(minY, maxY + 1)
+            });
+            population.addPoint(newPoint);
+        }
+
+        return population;
+    }
+
 	public void addPoint(Point p) {
 		this.pointList.add(p);
 	}
@@ -34,13 +55,6 @@ public class Population implements ISubject {
 
 	public Point getPoint(int i){
 		return pointList.get(i);
-	}
-
-	public static Population CreateInitialPopulation(int populationSize)
-	{
-
-		//TODO: Initial population
-		return new Population();
 	}
 
 	public void setPoint(int i, Point point) {

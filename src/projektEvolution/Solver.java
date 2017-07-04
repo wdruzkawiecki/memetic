@@ -10,12 +10,6 @@ public class Solver extends Notifier<Population> {
 	private Population initialPopulation;
 	private Observer<Population> observer;
 	
-	private void solve(){
-		EvolutionAlgorithm evolutionAlgorithm = new EvolutionAlgorithm(initialPopulation, function);
-
-		evolutionAlgorithm.notifyAll();
-	}
-
 	public Solver(IAlgorithm algorithm, Domain domain, IFunction function, Population initialPopulation) {
 		this.algorithm = algorithm;
 		this.domain = domain;
@@ -23,11 +17,21 @@ public class Solver extends Notifier<Population> {
 		this.initialPopulation = initialPopulation;
 		this.observer = new PopulationObserver(algorithm.getNotifier());
 	}
-	
-	public Population getSolution() {
+
+    private void solve() {
+        try {
+            this.algorithm.Run();
+        } catch (Exception e) {
+            System.out.print(e.getMessage());
+        }
+
+        this.algorithm.notifyAll();
+    }
+
+    public Population getSolution() {
 		// metoda zwracaj¹ca wynikow¹ populacjê
 		this.solve();
-		return new Population();
-	}
+        return this.algorithm.ReturnResultPopulation();
+    }
 
 }
