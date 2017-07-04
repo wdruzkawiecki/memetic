@@ -16,7 +16,6 @@ public class Program {
 //		System.out.println(rastr.getValue(p));
             
                 EventQueue.invokeLater(new Runnable() {
-                    @Override
                     public void run() {
                         new MyFrame();
                     }

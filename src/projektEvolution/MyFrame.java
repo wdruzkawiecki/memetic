@@ -24,31 +24,37 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 public class MyFrame extends JFrame {
+	JFormattedTextField scopeBeginningFieldX;
+	JFormattedTextField scopeBeginningFieldY;
+	JFormattedTextField scopeEndFieldX;
+	JFormattedTextField scopeEndFieldY;
+	JCheckBox evolutionStrategyCheckbox;
+	JCheckBox psoCheckbox;
+	JCheckBox blxCheckbox;
+	
     public MyFrame() {
         super("Memetic");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800,200);
         
-
-        
         JPanel scopePanel = new JPanel();
         scopePanel.setBorder(BorderFactory.createTitledBorder("Dziedzina"));
         add(scopePanel, BorderLayout.NORTH);
         
-	        NumberFormat format = DecimalFormat.getInstance();
-	        format.setMinimumFractionDigits(10);
-	        format.setMaximumFractionDigits(10);
-	        format.setRoundingMode(RoundingMode.HALF_UP);
+	    NumberFormat format = DecimalFormat.getInstance();
+	    format.setMinimumFractionDigits(10);
+	    format.setMaximumFractionDigits(10);
+	    format.setRoundingMode(RoundingMode.HALF_UP);
                 
-	        JLabel scopeBeginningLabelX = new JLabel();
-	        scopeBeginningLabelX.setText("Poczatek dziedziny (");
-	        JFormattedTextField scopeBeginningFieldX = new JFormattedTextField(format);
-	        scopeBeginningFieldX.setColumns(10);
+	    JLabel scopeBeginningLabelX = new JLabel();
+	    scopeBeginningLabelX.setText("Poczatek dziedziny (");
+	    scopeBeginningFieldX = new JFormattedTextField(format);
+	    scopeBeginningFieldX.setColumns(10);
                 
-                JLabel scopeBeginningLabelY = new JLabel();
-	        scopeBeginningLabelY.setText(")");
-	        JFormattedTextField scopeBeginningFieldY = new JFormattedTextField(format);
-	        scopeBeginningFieldY.setColumns(10);
+        JLabel scopeBeginningLabelY = new JLabel();
+        scopeBeginningLabelY.setText(")");
+        scopeBeginningFieldY = new JFormattedTextField(format);
+        scopeBeginningFieldY.setColumns(10);
         
         scopePanel.add(scopeBeginningLabelX);
         scopePanel.add(scopeBeginningFieldX);
@@ -57,15 +63,15 @@ public class MyFrame extends JFrame {
         scopePanel.add(scopeBeginningLabelY);
         
 
-	        JLabel scopeEndLabelX = new JLabel();
-	        scopeEndLabelX.setText("Koniec dziedziny (");
-	        JFormattedTextField scopeEndFieldX = new JFormattedTextField(format);
-	        scopeEndFieldX.setColumns(10);
+        JLabel scopeEndLabelX = new JLabel();
+        scopeEndLabelX.setText("Koniec dziedziny (");
+	    scopeEndFieldX = new JFormattedTextField(format);
+	    scopeEndFieldX.setColumns(10);
                 
-                 JLabel scopeEndLabelY = new JLabel();
-	        scopeEndLabelY.setText(")");
-	        JFormattedTextField scopeEndFieldY = new JFormattedTextField(format);
-	        scopeEndFieldY.setColumns(10);
+	    JLabel scopeEndLabelY = new JLabel();
+	    scopeEndLabelY.setText(")");
+	    scopeEndFieldY = new JFormattedTextField(format);
+	    scopeEndFieldY.setColumns(10);
         
         scopePanel.add(scopeEndLabelX);
         scopePanel.add(scopeEndFieldX);
@@ -77,57 +83,46 @@ public class MyFrame extends JFrame {
         algorithmsPanel.setBorder(BorderFactory.createTitledBorder("Algorytmy"));
         add(algorithmsPanel, BorderLayout.CENTER);
 	        
-	        JCheckBox evolutionStrategyCheckbox = new JCheckBox("Evolution Strategy");
-	        algorithmsPanel.add(evolutionStrategyCheckbox);
+        evolutionStrategyCheckbox = new JCheckBox("Evolution Strategy");
+        algorithmsPanel.add(evolutionStrategyCheckbox);
 	        
-	        JCheckBox psoCheckbox = new JCheckBox("PSO");
-	        algorithmsPanel.add(psoCheckbox);
+        psoCheckbox = new JCheckBox("PSO");
+        algorithmsPanel.add(psoCheckbox);
 	        
-	        JCheckBox blxCheckbox = new JCheckBox("BLX");
-	        algorithmsPanel.add(blxCheckbox);
+        blxCheckbox = new JCheckBox("BLX");
+        algorithmsPanel.add(blxCheckbox);
 	         
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBorder(BorderFactory.createTitledBorder(""));
         add(buttonPanel, BorderLayout.SOUTH);
 	        
-	        JButton submitButton = new JButton();
-	        submitButton.setText("Generuj");
+        JButton submitButton = new JButton();
+        submitButton.setText("Generuj");
 	        
-	        buttonPanel.add(submitButton);
+	    buttonPanel.add(submitButton);
                 
-        class DoIt implements ActionListener {
+        submitButton.addActionListener(new ActionListener() {
 
-			public void actionPerformed(ActionEvent arg0) {
-                            
-                            SwingUtilities.invokeLater(new Runnable() {
-
-                                @Override
-                                    public void run() {
-                                    double ax = Double.parseDouble(scopeBeginningFieldX.getText().replace(",", "."));
-                                    double ay = Double.parseDouble(scopeBeginningFieldY.getText().replace(",", "."));
-                                    double bx = Double.parseDouble(scopeEndFieldX.getText().replace(",", "."));
-                                    double by = Double.parseDouble(scopeEndFieldY.getText().replace(",", "."));
-                                    
-                                    boolean evolution = evolutionStrategyCheckbox.isSelected();
-                                    boolean pso = psoCheckbox.isSelected();
-                                    boolean blx = blxCheckbox.isSelected();
-                                    
-                                    RandomGen RandomGen = new RandomGen();
-                                    double[][] populacja = RandomGen.randFunctionDouble(ax, ay, bx, by, 1000);
-                                    
-                                    if (evolution) {}
-                                    if (pso) {}
-                                    if (blx) {}
-                                                                    
-                                }
-                            });
+			public void actionPerformed(ActionEvent e) {
+				double ax = Double.parseDouble(scopeBeginningFieldX.getText().replace(",", "."));
+				double ay = Double.parseDouble(scopeBeginningFieldY.getText().replace(",", "."));
+				double bx = Double.parseDouble(scopeEndFieldX.getText().replace(",", "."));
+				double by = Double.parseDouble(scopeEndFieldY.getText().replace(",", "."));
+              
+				boolean evolution = evolutionStrategyCheckbox.isSelected();
+				boolean pso = psoCheckbox.isSelected();
+				boolean blx = blxCheckbox.isSelected();
+              
+				RandomGen RandomGen = new RandomGen();
+				double[][] populacja = RandomGen.randFunctionDouble(ax, ay, bx, by, 1000);
+              
+				if (evolution) {}
+				if (pso) {}
+				if (blx) {}
 				
 			}
-                        
-
-          }
-	        
-            submitButton.addActionListener(new DoIt());
+        	
+        });
             
 	    setLocationRelativeTo(null);
 	   
