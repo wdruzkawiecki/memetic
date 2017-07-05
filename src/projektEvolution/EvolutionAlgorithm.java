@@ -87,7 +87,7 @@ public class EvolutionAlgorithm implements IAlgorithm {
         for (Map.Entry<Point, Double> entry : sortedHashMap.entrySet()) {
             if (i < 100) {
                 this.resultPopulation.addPoint(entry.getKey());
-//                System.out.println("(" + entry.getKey().getVector()[0] + ", " + entry.getKey().getVector()[1] + ") : " + entry.getValue());
+                System.out.println("(" + entry.getKey().getVector()[0] + ", " + entry.getKey().getVector()[1] + ") : " + entry.getValue());
                 i++;
             }
         }

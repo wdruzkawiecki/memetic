@@ -31,7 +31,7 @@ public class Solver extends Notifier<Population> {
     public Population getSolution() {
 		// metoda zwracaj¹ca wynikow¹ populacjê
 		this.solve();
-        return this.algorithm.ReturnResultPopulation();
+        return null;
     }
 
 }
